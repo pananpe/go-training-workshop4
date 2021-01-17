@@ -43,7 +43,7 @@ func main() {
 	}
 
 	viper.SetDefault("app.addr", "0.0.0.0:8888")
-	viper.SetDefault("jwt.secret", "aunpassword")
+	viper.SetDefault("jwt.secret", "pananpass")
 
 	//db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{})
 
@@ -80,11 +80,17 @@ func main() {
 	router.Use(logger.Middleware(l))
 
 	router.GET("/ping", func(c echo.Context) error {
-		return c.String(200, "pong")
+		return c.String(200, "pong Time:"+time.Now().String())
 	})
 	router.GET("/ready", NewReadyHandler(db))
 	router.GET("/captcha", captchaHandler)
 	router.POST("/exchange", exchangeHandler)
+
+	// router.GET("/todos", todos.NewListTodoHandler(db))
+	// router.GET("/todos/:id", todos.NewGetTodoHandler(db))
+	// router.POST("/todos", todos.NewNewTodoHandler(db))
+	// router.PUT("/todos/:id", todos.NewUpdateTodoHandler(db))
+	// router.DELETE("/todos/:id", todos.NewDeleteTodoHandler(db))
 
 	restricted := router.Group("")
 	restricted.Use(middleware.JWTWithConfig(middleware.JWTConfig{
@@ -155,9 +161,9 @@ func exchangeHandler(c echo.Context) error {
 
 	// Set claims
 	claims := token.Claims.(jwt.MapClaims)
-	claims["name"] = "Jon Snow"
+	claims["name"] = "Panan Perm"
 	claims["admin"] = true
-	claims["exp"] = time.Now().Add(time.Minute * 10).Unix()
+	claims["exp"] = time.Now().Add(time.Minute * 30).Unix()
 
 	// Generate encoded token and send it as response.
 	t, err := token.SignedString([]byte(viper.GetString("jwt.secret")))

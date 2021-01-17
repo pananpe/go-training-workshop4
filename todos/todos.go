@@ -144,8 +144,10 @@ func NewUpdateTodoHandler(db *gorm.DB) echo.HandlerFunc {
 		}
 
 		// update fields
-		task.Task = todo.Task
-		task.Processed = todo.Processed
+		logger.Info("todo.Task ..." + todo.Task)
+
+		//task.Task = todo.Task
+		task.Processed = true
 
 		if result := db.Save(&task); result.Error != nil {
 			return c.JSON(http.StatusBadRequest, map[string]string{
@@ -176,6 +178,7 @@ func NewDeleteTodoHandler(db *gorm.DB) echo.HandlerFunc {
 				"error": errors.Wrap(err, "Delete Task").Error(),
 			})
 		}
+
 		var task = Task{}
 
 		if result := db.Find(&task, id); result.Error != nil {
@@ -193,6 +196,17 @@ func NewDeleteTodoHandler(db *gorm.DB) echo.HandlerFunc {
 				"error": errors.Wrap(result.Error, "Delete Task").Error(),
 			})
 		}
+		// update fields is_deleted
+		if task.DeletedAt.Valid {
+			logger.Info("delete task ..." + task.DeletedAt.Time.String())
+		}
+		task.IsDeleted = true
+
+		if result := db.Save(&task); result.Error != nil {
+			return c.JSON(http.StatusBadRequest, map[string]string{
+				"error": errors.Wrap(result.Error, "Update Task").Error(),
+			})
+		}
 
 		return c.JSON(http.StatusOK, task)
 	}
@@ -203,4 +217,5 @@ type Task struct {
 	gorm.Model
 	Task      string
 	Processed bool
+	IsDeleted bool
 }
