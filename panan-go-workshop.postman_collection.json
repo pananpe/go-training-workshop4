@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "3803eb0c-4e26-4818-8ad0-757c5f876cff",
+		"name": "panan-go-workshop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9999/captcha",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/captcha",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"captcha"
+					]
+				},
+				"description": "Step1 - captcha get key"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/exchange?key=8c3edd08-3e6e-4e2c-b70c-36745fc0b555&answer=4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/exchange?key=16dba819-0c71-45b9-bff1-6e4638a6f063&answer=16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"exchange"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "16dba819-0c71-45b9-bff1-6e4638a6f063"
+						},
+						{
+							"key": "answer",
+							"value": "16"
+						}
+					]
+				},
+				"description": "Step2-get token"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/todos?task=new record!001",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "jwt",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNjEwODgzMDYxLCJuYW1lIjoiUGFuYW4gUGVybXBpYm9vbiJ9.36bQKM34Puh4n0WbokloW6BYVKwH4rvhWF9n8Q1KdRE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9999/todos?task=Add record!003",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"todos"
+					],
+					"query": [
+						{
+							"key": "task",
+							"value": "Add record!003"
+						}
+					]
+				},
+				"description": "step3-create todos"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/todos/2",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/todos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"todos",
+						"2"
+					]
+				},
+				"description": "step4-soft delete"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/todos/11",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/todos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"todos",
+						"1"
+					]
+				},
+				"description": "Step5-Update Task"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/todos",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/todos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"todos"
+					]
+				},
+				"description": "Step6-List Task (all)"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/todos/10",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9999/todos/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"todos",
+						"3"
+					]
+				},
+				"description": "Step7-Get Task by id"
+			},
+			"response": []
+		}
+	]
+}
