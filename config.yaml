@@ -1,0 +1,4 @@
+app:
+  addr: 0.0.0.0:9999
+  db-connectionurl: sqlserver://sa:1234@localhost/SQLEXPRESS01?database=Training
+  # dbconnectionurl: sqlserver://test:test@localhost:1434?database=go_training
